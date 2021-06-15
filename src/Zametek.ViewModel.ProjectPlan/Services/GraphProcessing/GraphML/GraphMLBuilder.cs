@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using GraphX.PCL.Common;
 using Zametek.Common.ProjectPlan;
 
 namespace Zametek.ViewModel.ProjectPlan
@@ -17,6 +18,9 @@ namespace Zametek.ViewModel.ProjectPlan
                 throw new ArgumentNullException(nameof(diagramArrowGraph));
             }
             IList<DiagramNodeModel> diagramNodes = diagramArrowGraph.Nodes.ToList();
+            diagramNodes.ForEach(node => node.Text = string.Empty);
+            diagramNodes.First().Text = "Start";
+            diagramNodes[1].Text = "End";
             IList<DiagramEdgeModel> diagramEdges = diagramArrowGraph.Edges.ToList();
             var graph = new graphmlGraph
             {
@@ -39,13 +43,14 @@ namespace Zametek.ViewModel.ProjectPlan
         #endregion
 
         #region Private Methods
-
+        
         private static graphmlGraphNode BuildArrowGraphNode(DiagramNodeModel diagramNode)
         {
             if (diagramNode == null)
             {
                 throw new ArgumentNullException(nameof(diagramNode));
             }
+
             var outputNode = new graphmlGraphNode
             {
                 id = FormatArrowGraphNodeId(diagramNode.Id),
@@ -75,7 +80,7 @@ namespace Zametek.ViewModel.ProjectPlan
                         },
                         Shape = new ShapeNodeShape
                         {
-                            type = "roundrectangle"
+                            type = "ellipse"
                         },
                         NodeLabel = new ShapeNodeNodeLabel
                         {
@@ -85,13 +90,13 @@ namespace Zametek.ViewModel.ProjectPlan
                             fontSize = "12",
                             fontStyle = "plain",
                             hasBackgroundColor = "false",
-                            hasLineColor = "false",
+                            hasLineColor = "true",
                             hasText = "true",
-                            height = "4.0",
+                            height = "35.0",
                             modelName = "custom",
                             textColor = "#000000",
                             visible = "true",
-                            width = "4.0",
+                            width = "35.0",
                             x = "13.0",
                             y = "13.0",
                             Text = diagramNode.Text,

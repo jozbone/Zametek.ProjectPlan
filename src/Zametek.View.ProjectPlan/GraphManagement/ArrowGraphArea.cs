@@ -50,12 +50,14 @@ namespace Zametek.View.ProjectPlan
                 Point point = vertexControl.GetPosition();
                 outputNode.X = point.X;
                 outputNode.Y = point.Y;
-                outputNode.Height = vertexControl.ActualHeight;
-                outputNode.Width = vertexControl.ActualWidth;
-                Color fillColor = ((SolidColorBrush)vertexControl.Background).Color;
+                outputNode.Height = vertexControl.ActualHeight > vertexControl.ActualWidth? vertexControl.ActualHeight : vertexControl.ActualWidth;
+                outputNode.Width = vertexControl.ActualHeight > vertexControl.ActualWidth ? vertexControl.ActualHeight : vertexControl.ActualWidth;
+                // Color fillColor = ((SolidColorBrush)vertexControl.Background).Color;
+                Color fillColor = Colors.White;
                 outputNode.FillColorHexCode =
                     ViewModel.ProjectPlan.Converter.HexConverter(fillColor.R, fillColor.G, fillColor.B);
-                Color borderColor = ((SolidColorBrush)vertexControl.BorderBrush).Color;
+                // Color borderColor = ((SolidColorBrush)vertexControl.BorderBrush).Color;
+                Color borderColor = Colors.Black;
                 outputNode.BorderColorHexCode =
                     ViewModel.ProjectPlan.Converter.HexConverter(borderColor.R, borderColor.G, borderColor.B);
                 outputNode.Text = node.ToString();
@@ -119,11 +121,13 @@ namespace Zametek.View.ProjectPlan
                 }
                 else
                 {
-                    labelText.AppendFormat(CultureInfo.InvariantCulture, "{0} ({1})", edge.ID, edge.Duration);
+                    // labelText.AppendFormat(CultureInfo.InvariantCulture, "{0} ({1})", edge.ID, edge.Duration);
+                    labelText.AppendFormat(CultureInfo.InvariantCulture, "{0}", edge.ID, edge.Duration);
                     if (!edge.IsCritical)
                     {
                         labelText.AppendLine();
-                        labelText.AppendFormat(CultureInfo.InvariantCulture, "{0}|{1}", edge.FreeSlack, edge.TotalSlack);
+                        // labelText.AppendFormat(CultureInfo.InvariantCulture, "{0}|{1}", edge.FreeSlack, edge.TotalSlack);
+                        labelText.AppendFormat(CultureInfo.InvariantCulture, "{0}", edge.TotalSlack);
                     }
                     outputEdge.ShowLabel = true;
                 }
