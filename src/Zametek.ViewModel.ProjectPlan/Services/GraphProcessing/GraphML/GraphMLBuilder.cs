@@ -155,6 +155,11 @@ namespace Zametek.ViewModel.ProjectPlan
                     throw new InvalidOperationException($@"Unknown EdgeDashStyle value ""{diagramEdge.DashStyle}""");
             }
 
+            var edgeName = string.IsNullOrWhiteSpace(diagramEdge.Name)
+                ? string.Empty
+                : diagramEdge.Name.Substring(0, Math.Min(diagramEdge.Name.Length, 64));
+            var edgeText = diagramEdge.IncludeEdgeNames ? edgeName : diagramEdge.Label;
+
             outputEdge.data = new data
             {
                 key = "d10",
@@ -210,7 +215,8 @@ namespace Zametek.ViewModel.ProjectPlan
                             sideReference = "relative_to_edge_flow"
                         },
                         hasText = "true",
-                        Text = diagramEdge.Label
+                        Text = edgeText,
+                        // Text = diagramEdge.Name
                     },
                     BendStyle = new PolyLineEdgeBendStyle
                     {

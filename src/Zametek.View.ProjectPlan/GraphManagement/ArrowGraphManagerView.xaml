@@ -92,6 +92,7 @@
               DockPanel.Dock="Right"
               Background="LightGray">
             <DockPanel Margin="7">
+                <CheckBox Name="IncludeNamesCheckbox" DockPanel.Dock="Bottom" Content="Include Edge Names?"></CheckBox>
                 <Button Padding="3"
                         Margin="0,7,0,0"
                         DockPanel.Dock="Bottom"

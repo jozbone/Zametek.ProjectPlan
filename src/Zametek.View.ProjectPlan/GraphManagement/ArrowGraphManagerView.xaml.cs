@@ -113,6 +113,9 @@ namespace Zametek.View.ProjectPlan
         {
             try
             {
+                bool includeNamesOfEdges = IncludeNamesCheckbox.IsChecked.HasValue ? IncludeNamesCheckbox.IsChecked.Value : false;
+                ArrowGraphAreaCtrl.IncludeEdgeNames = includeNamesOfEdges;
+    
                 string directory = m_SettingService.PlanDirectory;
 
                 var filter = new FileDialogFileTypeFilter(

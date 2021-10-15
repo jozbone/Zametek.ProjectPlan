@@ -16,13 +16,15 @@ namespace Zametek.View.ProjectPlan
     {
         #region Public Methods
 
+        public bool IncludeEdgeNames { get; set; }
+
         public DiagramArrowGraphModel ToDiagramArrowGraph()
         {
             // Add nodes.
             IList<VertexControl> vertexControls = VertexList.Values.ToList();
             var nodes = vertexControls.Select(BuildDiagramNode).ToList();
 
-            // Add edges.
+            // Add edges
             IList<EdgeControl> edgeControls = EdgesList.Values.ToList();
             var edges = edgeControls.Select(BuildDiagramEdge).ToList();
 
@@ -37,7 +39,7 @@ namespace Zametek.View.ProjectPlan
 
         #region Private Methods
 
-        private static DiagramNodeModel BuildDiagramNode(VertexControl vertexControl)
+        private DiagramNodeModel BuildDiagramNode(VertexControl vertexControl)
         {
             if (vertexControl == null)
             {
@@ -65,7 +67,7 @@ namespace Zametek.View.ProjectPlan
             return outputNode;
         }
 
-        private static DiagramEdgeModel BuildDiagramEdge(EdgeControl edgeControl)
+        private DiagramEdgeModel BuildDiagramEdge(EdgeControl edgeControl)
         {
             if (edgeControl == null)
             {
@@ -133,6 +135,9 @@ namespace Zametek.View.ProjectPlan
                 }
                 outputEdge.Label = labelText.ToString();
             }
+
+            outputEdge.IncludeEdgeNames = IncludeEdgeNames;
+
             return outputEdge;
         }
 

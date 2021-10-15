@@ -22,5 +22,7 @@ namespace Zametek.Common.ProjectPlan
         public string Label { get; set; }
 
         public bool ShowLabel { get; set; }
+
+        public bool IncludeEdgeNames { get; set; }
     }
 }
